@@ -42,3 +42,11 @@ loss = tf.reduce_sum(squared_deltas) # run using sess.run(loss, {x: <any value>,
 # Reassign values using
 # foo = tf.assign(W, [any value])
 # don't forget to call sess.run(foo) every time you declare or do initialization
+
+optimizer = tf.train.GradientDescentOptimizer(0.01)
+train = optimizer.minimize(loss)
+sess.run(init) # reset values to incorrect defaults
+for i in range(1000):
+    sess.run(train, {x: [1, 2, 3, 4], y: [-1, -2, -3, -5]})
+
+# Test using sess.run([W, b])
