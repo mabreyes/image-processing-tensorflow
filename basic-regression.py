@@ -22,6 +22,9 @@ train = optimizer.minimize(loss)
 x_train = [1, 2, 3, 4]
 y_train = [0, -1, -2, -3]
 
+# Session
+sess = tf.Session()
+
 # Training loop
 init = tf.global_variables_initializer()
 sess.run(init)
