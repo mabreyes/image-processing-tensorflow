@@ -5,6 +5,10 @@ from __future__ import print_function
 import argparse
 import sys
 
+# Avoid console warnings
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL']='2'
+
 from tensorflow.examples.tutorials.mnist import input_data
 
 import tensorflow as tf

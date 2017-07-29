@@ -1,5 +1,8 @@
 # A simple regression model (preferrably in TensorFlow) contains the following components:
 
+# Avoid console warnings
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL']='2'
 import tensorflow as tf
 
 # Model parameters

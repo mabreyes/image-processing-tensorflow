@@ -1,3 +1,6 @@
+# Avoid console warnings
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL']='2'
 import tensorflow as tf
 
 # Node creation
@@ -36,7 +39,7 @@ sess.run(init)
 # that error. Then, we sum all the squared errors to create a single scalar
 # that abstracts the error of all examples using tf.reduce_sum:
 y = tf.placeholder(tf.float32)
-squared_deltas = tf.square(linear_model - y)
+squared_deltas = tf.square(linear_model - y) # (yhat - y)^2
 loss = tf.reduce_sum(squared_deltas) # run using sess.run(loss, {x: <any value>, b: <any value>})
 
 # Reassign values using
