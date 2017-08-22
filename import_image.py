@@ -3,6 +3,7 @@ import ssl
 import urllib.request as urq
 import matplotlib.pyplot as plt
 import numpy as np
+from scipy import imresize
 
 def download_image(folder_name):
     os.mkdir(folder_name)
@@ -57,3 +58,37 @@ def imcrop(image, amt):
     row_i = int(image.shape[0] * amt) // 2
     col_i = int(image.shape[1] * amt) // 2
     return img[row_i: -row_i, col_i: -col_i]
+
+# Crop the image to square and resizing it
+# square = imcrop_tosquare(img)
+# crop = imcrop(square)
+# resize = imresize(crop, (64, 64))
+# plt.imshow(resize)
+
+# plt.imshow(resize, interpolation='nearest')
+
+# Combine the red, green, and blue channels and get their average
+mean_img = np.mean(resize, axis=2)
+print(mean_img.shape)
+plt.imshow(mean_img, cmap='gray')
+
+# Crop and resize the images contained on the files array (os.listdir(folder_name)) using
+# function calls
+image_resized_list = []
+for file_i in files:
+    img = plt.imread(file_i)
+    square = imcrop_tosquare(img)
+    crop = imcrop(square, 0.2)
+    resize = imresize(crop, (64, 64))
+    image_resized_list.append(resize)
+print(len(image_resized_list))
+
+# Batch dimension (NxHxWxC) where N is the number of images, H is the no. of rows of the image,
+# W is the no. of columns of the image, and C is the number of channels (3 if rgb, 1 if grayscale)
+data = np.array(image_resized_list)
+data.shape
+
+# We can also use the np.concatenate function but we have to add a new axis (dimension)
+# for each image using np.newaxis
+data = np.concatenate([img_i[np.newaxis] for img_i in image_resized_list], axis=0)
+data.shape
