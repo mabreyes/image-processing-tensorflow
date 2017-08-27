@@ -40,7 +40,8 @@ flattened = data.ravel()
 
 """ Equalization means to select an image and subtract it to the mean of all
 the images contained inside the batch dimension and dividing the answer to the 
-standard deviation of all the images contained inside the batch dimension
+standard deviation of all the images contained inside the batch dimension. Do not
+forget to flatten using the ravel() function
 """
 
 # figsize (w, h) tuple how large the ouput figure will be
@@ -58,4 +59,13 @@ axs[1].hist((std_data).ravel(), bins)
 axs[1].set_title('std distribution')
 axs[2].hist(((data[0] - mean_data) / std_data).ravel(), bins)
 axs[2].set_title('((img - mean) / std) distribution')
+# Uncomment to disregard set_xlim()
+# plt.show()
+
+# Look at a different scale set_xlim() means to zoom on x range a to b (a, b)
+axs[2].set_xlim([-150, 150])
+axs[2].set_xlim([-100, 100])
+axs[2].set_xlim([-50, 50])
+axs[2].set_xlim([-10, 10])
+axs[2].set_xlim([-5, 5])
 plt.show(fig.show())
