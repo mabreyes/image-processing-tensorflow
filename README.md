@@ -5,4 +5,4 @@ The contents of this repository are of completion of the tutorial by [@pkmital/C
 
 ### Social media
 * Follow Marc X: [Facebook](https://facebook.com/marcreyesph), [GitHub](https://github.com/marcreyesph)
-* Follow Marc Reyes: [Facebook](https://facebook.com/marcxph), [Twitter](https://twitter.com/marcreyesph)
+* Follow Marc Reyes: [Facebook](https://facebook.com/marcxplanet), [Twitter](https://twitter.com/marcreyesph)
