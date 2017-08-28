@@ -1,5 +1,10 @@
 import tensorflow as tf 
-import numpy as np 
+import numpy as np
+import matplotlib.pyplot as plt
+import os
+
+# Avoid console warnings by tensorflow
+os.environ['TF_CPP_MIN_LOG_LEVEL']='2'
 
 """ Create a linspace using numpy.linspace (start_val, end_val, 
 number of contents in the array)
@@ -18,7 +23,8 @@ g = tf.get_default_graph()
 
 # Create a session first before we can evaluate tensors
 sess = tf.Session()
-computed_x = sess(x)
+# Using sess without run won't work
+computed_x = sess.run(x)
 """ Alternatively we can use
 compute_x = x.eval(session=sess)
 We tell the tensor to evaluate itself using this session
@@ -55,3 +61,18 @@ z = (tf.exp(tf.negative(tf.pow(x - mean, 2.0) /
 # Evaluate the tensor for z
 gaussian_graph = z.eval()
 plt.plot(gaussian_graph)
+plt.show()
+
+# TODO: Understand more of this concept
+# Creating a 2-D Gaussian Kernel
+# (N, 1) x (1, N) inner dimensions should match, N are the result of matrix mult
+# Store the number of values from our Gaussian curve
+ksize = z.get_shape().as_list()[0]
+"""Multiply the transposed matrix to the new shape with respect to the number of contents
+of the Gaussian curve
+"""
+# tf.reshape arguments (tensor, shape, name)
+# Multiply matrix to the transform of the matrix to get 2-D
+z_2d = tf.matmul(tf.reshape(z, [ksize, 1]), tf.reshape(z, [1, ksize]))
+plt.imshow(z_2d.eval())
+plt.show()
