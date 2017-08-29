@@ -87,12 +87,12 @@ print(img.shape)
 
 # Reshaping in 4-D means 1xHxWx1 or 1 x img.shape[0] x img.shape[1] x 1
 img_4d = tf.reshape(img, [1, img.shape[0], img.shape[1], 1])
-print(img_4d.shape().as_list())
+print(img_4d.get_shape().as_list())
 
 """Reshape Gaussian kernel (z_2d) to required tensorflow 4-D format HxWxIXO
 where H is height, W is width, I is input channel, O is output channel. We 
 already have the size of the kernel which is ksize so we will use that
 """
 z_4d = tf.reshape(z_2d, [ksize, ksize, 1, 1])
-print(z_4d.shape().as_list())
+print(z_4d.get_shape().as_list())
 
