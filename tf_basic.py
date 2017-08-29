@@ -1,3 +1,4 @@
+from skimage import data
 import tensorflow as tf 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -76,3 +77,10 @@ of the Gaussian curve
 z_2d = tf.matmul(tf.reshape(z, [ksize, 1]), tf.reshape(z, [1, ksize]))
 plt.imshow(z_2d.eval())
 plt.show()
+
+# 4-D image convolution
+# skimage data has some images to manipulate with
+img = data.camera().astype(np.float32)
+plt.imshow(img, cmap='gray')
+plt.show()
+print(img.shape.as_list())
