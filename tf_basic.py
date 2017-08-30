@@ -96,3 +96,11 @@ already have the size of the kernel which is ksize so we will use that
 z_4d = tf.reshape(z_2d, [ksize, ksize, 1, 1])
 print(z_4d.get_shape().as_list())
 
+# TODO: Understand more of this concept
+# Convolve/filter an image using previous Gaussian Kernel
+"""Stride means how much the window shifts by in each dimension
+Value of strides can be [1,1,1,1] or [1,2,2,1]
+"""
+convolved = tf.nn.conv2d(img_4d, z_4d, strides=[1,1,1,1], padding='SAME')
+result = convolved.eval()
+print(result.shape)
