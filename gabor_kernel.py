@@ -9,6 +9,24 @@ os.environ['TF_CPP_MIN_LOG_LEVEL']='2'
 
 sess = tf.InteractiveSession()
 
+img_dataset = [os.path.join('img_align_celeba_small', img_i)
+			   for img_i in os.listdir('img_align_celeba_small')
+			   if '.jpg' in img_i]
+
+img_dataset_read = [plt.imread(img_i)
+					for img_i in img_dataset]
+
+img_data = np.array(img_dataset_read)
+
+img_data_mean = np.mean(img_data, axis=0)
+img_data_std = np.std(img_data, axis=0)
+img_normalized = ((img_data[0] - img_data_mean) / img_data_std)
+
+"""plt.hist(img_normalized.ravel(), 20)
+print(img_normalized.shape)
+plt.show()
+"""
+
 # The image tensor
 img = tf.placeholder(tf.float32, shape=[None, None], name='img')
 
