@@ -22,9 +22,8 @@ plt.show()
 """
 
 std_data = np.std(data, axis=0)
-"""plt.imshow(std_data.astype(np.uint8))
+plt.imshow(std_data.astype(np.uint8))
 plt.show()
-"""
 
 # Generate a heat map by getting the mean of the std of all channels
 # plt.imshow(np.mean(std_data, axis=2).astype(np.uint8))
@@ -60,7 +59,7 @@ axs[1].set_title('std distribution')
 axs[2].hist(((data[0] - mean_data) / std_data).ravel(), bins)
 axs[2].set_title('((img - mean) / std) distribution')
 # Uncomment to disregard set_xlim()
-# plt.show(fig.show(s))
+# plt.show(fig.show())
 
 # Look at a different scale set_xlim() means to zoom on x range a to b (a, b)
 axs[2].set_xlim([-150, 150])
