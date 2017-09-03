@@ -32,15 +32,23 @@ image_files = [os.path.join('img_session1_assign', image_files_i)
 
 assert(len(image_files) == 100)
 
+# Read images contained in the dataset
 images = [plt.imread(images_i)[..., :3] for images_i in image_files]
 
+# Crop images to square 
 images = [utils.imcrop_tosquare(images_i) for images_i in images]
 
+# Resize crop images to 100px by 100px
 images = [resize(images_i, (100, 100)) for images_i in images]
 
+# Batch dimension (100, 100, 100, 3)
 images = np.array(images).astype(np.float32)
 
+# Returns error if images.shape is not (100, 100, 100, 3)
 assert(images.shape == (100, 100, 100, 3))
+# Plot figure
 plt.figure(figsize=(10, 10))
+# Save image montage to dataset.png
 plt.imshow(utils.montage(images, saveto='dataset.png'))
+# Show figure
 plt.show()
