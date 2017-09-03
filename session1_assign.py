@@ -6,6 +6,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import os
 
+# TODO: Study again these concepts
 # Minimize TensorFlow console warnings
 os.environ['TF_CPP_MIN_LOG_LEVEL']='2'
 
