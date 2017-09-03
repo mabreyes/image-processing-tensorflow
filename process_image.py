@@ -22,8 +22,9 @@ plt.show()
 """
 
 std_data = np.std(data, axis=0)
-plt.imshow(std_data.astype(np.uint8))
+"""plt.imshow(std_data.astype(np.uint8))
 plt.show()
+"""
 
 # Generate a heat map by getting the mean of the std of all channels
 # plt.imshow(np.mean(std_data, axis=2).astype(np.uint8))

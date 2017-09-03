@@ -1,18 +1,46 @@
+from libs import utils
 from skimage import data
+from skimage.transform import resize
 import tensorflow as tf 
 import numpy as np
 import matplotlib.pyplot as plt
 import os
 
-def rename_images():
+# Minimize TensorFlow console warnings
+os.environ['TF_CPP_MIN_LOG_LEVEL']='2'
+
+""" Use this function to rename images in a directory if you want them
+uniform from 000001.jpg to 000100.jpg
+"""
+"""def rename_images():
 	path = './img_session1_assign'
 	files = os.listdir(path)
 	ctr = 1
 
 	for file_i in files:
-		f = '000%02d.jpg' %ctr
+		f = '000%03d.jpg' %ctr
 		os.rename(os.path.join(path, file_i), os.path.join(path, f + '.jpg'))
 		ctr = ctr + 1
 
 if __name__ == "__main__":
-    rename_images()
+	rename_images()
+"""
+
+image_files = [os.path.join('img_session1_assign', image_files_i)
+               for image_files_i in os.listdir('img_session1_assign')
+               if '.jpg' in image_files_i]
+
+assert(len(image_files) == 100)
+
+images = [plt.imread(images_i)[..., :3] for images_i in image_files]
+
+images = [utils.imcrop_tosquare(images_i) for images_i in images]
+
+images = [resize(images_i, (100, 100)) for images_i in images]
+
+images = np.array(images).astype(np.float32)
+
+assert(images.shape == (100, 100, 100, 3))
+plt.figure(figsize=(10, 10))
+plt.imshow(utils.montage(images, saveto='dataset.png'))
+plt.show()
