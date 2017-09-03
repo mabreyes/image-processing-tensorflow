@@ -49,6 +49,17 @@ assert(images.shape == (100, 100, 100, 3))
 # Plot figure
 plt.figure(figsize=(10, 10))
 # Save image montage to dataset.png
-plt.imshow(utils.montage(images, saveto='dataset.png'))
+# plt.imshow(utils.montage(images, saveto='dataset.png'))
 # Show figure
+# plt.show()
+
+sess = tf.Session()
+"""You can use np.mean but it won't be recognized inside the tensorflow
+session. We used tf.reduce_mean instead.
+"""
+mean_image_op = tf.reduce_mean(images, axis=0)
+mean_image = sess.run(mean_image_op)
+assert(mean_image.shape == (100, 100, 3))
+plt.imshow(mean_image)
 plt.show()
+plt.imsave(arr=mean_image, fname='mean.png')
