@@ -48,7 +48,7 @@ images = np.array(images).astype(np.float32)
 # Returns error if images.shape is not (100, 100, 100, 3)
 assert(images.shape == (100, 100, 100, 3))
 # Plot figure
-plt.figure(figsize=(10, 10))
+# plt.figure(figsize=(10, 10))
 # Save image montage to dataset.png
 # plt.imshow(utils.montage(images, saveto='dataset.png'))
 # Show figure
@@ -61,6 +61,37 @@ session. We used tf.reduce_mean instead.
 mean_image_op = tf.reduce_mean(images, axis=0)
 mean_image = sess.run(mean_image_op)
 assert(mean_image.shape == (100, 100, 3))
-plt.imshow(mean_image)
-plt.show()
+# plt.imshow(mean_image)
+# plt.show()
 plt.imsave(arr=mean_image, fname='mean.png')
+
+# mean_image_4d = tf.reduce_mean(images, axis=0, keep_dims=True)
+subtraction = images - tf.reduce_mean(images, axis=0, keep_dims=True)
+
+"""In this part, I compared the difference between the standard deviation
+of a batch that is not divided and divided to images.shape[0]. I did this 
+because normally the formula of standard deviation is sqrt((x-mean)^2 / (n-1))
+Where x is the image batch, mean is the mean of the image batch, and n is
+the number of images contained inside the batch or images.shape[0]
+"""
+# Without  / images.shape[0]
+std_image_op = tf.sqrt(tf.reduce_mean(subtraction * subtraction, axis=0))
+std_image = sess.run(std_image_op)
+assert (std_image.shape == (100, 100) or std_image.shape == (100, 100, 3))
+std_image_show = std_image / np.max(std_image)
+
+# With / images.shape[0]
+std_image_op_2 = tf.sqrt(tf.reduce_mean(subtraction * subtraction, axis=0) / images.shape[0])
+std_image_2 = sess.run(std_image_op_2)
+assert (std_image_2.shape == (100, 100) or std_image_2.shape == (100, 100, 3))
+std_image_show_2 = std_image_2 / np.max(std_image_2)
+
+# Show difference
+fig, axs = plt.subplots(1, 2, figsize=(12, 6), sharey=True, sharex=True)
+axs[0].imshow(std_image_show)
+axs[0].set_title('Without / images.shape[0]')
+axs[1].imshow(std_image_show_2)
+axs[1].set_title('With / images.shape[0]')
+plt.show(fig.show())
+# plt.imsave(arr=std_image_show, fname='std.png')
+
