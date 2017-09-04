@@ -74,7 +74,7 @@ because normally the formula of standard deviation is sqrt((x-mean)^2 / (n-1))
 Where x is the image batch, mean is the mean of the image batch, and n is
 the number of images contained inside the batch or images.shape[0]
 """
-# Without  / images.shape[0]
+# Without / images.shape[0]
 std_image_op = tf.sqrt(tf.reduce_mean(subtraction * subtraction, axis=0))
 std_image = sess.run(std_image_op)
 assert (std_image.shape == (100, 100) or std_image.shape == (100, 100, 3))
@@ -92,6 +92,16 @@ axs[0].imshow(std_image_show)
 axs[0].set_title('Without / images.shape[0]')
 axs[1].imshow(std_image_show_2)
 axs[1].set_title('With / images.shape[0]')
-plt.show(fig.show())
+# plt.show(fig.show())
 # plt.imsave(arr=std_image_show, fname='std.png')
 
+# TODO: Check if the equation for normalization is correct
+# Normalization 
+norm_images_op = (images - mean_image_op) / std_image_op
+norm_images = sess.run(norm_images_op)
+print(np.min(norm_images), np.max(norm_images))
+print(images.dtype)
+norm_images_show = (norm_images - np.min(norm_images)) / (np.max(norm_images) - np.min(norm_images))
+plt.figure(figsize=(10, 10))
+plt.imshow(utils.montage(norm_images_show, 'normalized.png'))
+plt.show()
