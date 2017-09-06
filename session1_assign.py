@@ -95,14 +95,13 @@ axs[1].set_title('With / images.shape[0]')
 # plt.show(fig.show())
 # plt.imsave(arr=std_image_show, fname='std.png')
 
-# TODO: Check if the equation for normalization is correct
 # Normalization
 # 0-1 normalization: (x - min(x)) / (max(x) - min(x))
-norm_images_op = (images - mean_image_op) / std_image_op
+norm_images_op = tf.divide(tf.subtract(images, mean_image_op), std_image_op)
 norm_images = sess.run(norm_images_op)
 print(np.min(norm_images), np.max(norm_images))
 print(images.dtype)
 norm_images_show = (norm_images - np.min(norm_images)) / (np.max(norm_images) - np.min(norm_images))
 plt.figure(figsize=(10, 10))
 plt.imshow(utils.montage(norm_images_show, 'normalized.png'))
-plt.show()
+# plt.show()
