@@ -65,7 +65,7 @@ assert(mean_image.shape == (100, 100, 3))
 # plt.show()
 plt.imsave(arr=mean_image, fname='mean.png')
 
-# mean_image_4d = tf.reduce_mean(images, axis=0, keep_dims=True)
+# mean_image_4d = sess.run(tf.reduce_mean(images, axis=0, keep_dims=True))
 subtraction = images - tf.reduce_mean(images, axis=0, keep_dims=True)
 
 """In this part, I compared the difference between the standard deviation
@@ -105,3 +105,23 @@ norm_images_show = (norm_images - np.min(norm_images)) / (np.max(norm_images) - 
 plt.figure(figsize=(10, 10))
 plt.imshow(utils.montage(norm_images_show, 'normalized.png'))
 # plt.show()
+
+# Convolution
+ksize = 32
+kernel = np.concatenate([utils.gabor(ksize) [:, :, np.newaxis] for i in range(3)], axis=2)
+kernel_4d = sess.run(tf.reshape(kernel, [ksize, ksize, 3, 1]))
+# Input channel is 3 (rgb) output channel is just 1
+assert(kernel_4d.shape == (ksize, ksize, 3, 1))
+plt.figure(figsize=(5, 5))
+plt.imshow(kernel_4d[:, :, 0, 0], cmap='gray')
+plt.imsave(arr=kernel_4d[:, :, 0, 0], fname='kernel.png', cmap='gray')
+# plt.show()
+""" TODO: Work on this one because my computer is failing when I put images
+on the first argument
+"""
+convolved = utils.convolve(mean_image_4d, kernel_4d)
+convolved_show = (convolved - min(convolved)) / (np.max(convolved) - np.min(convolved))
+print(convolved_show.shape)
+plt.figure(figsize=(10, 10))
+plt.imshow(utils.montage(convolved_show[...,0], 'convolved.png'), cmap='gray')
+plt.show()
