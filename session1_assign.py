@@ -65,8 +65,8 @@ assert(mean_image.shape == (100, 100, 3))
 # plt.show()
 plt.imsave(arr=mean_image, fname='mean.png')
 
-# mean_image_4d = sess.run(tf.reduce_mean(images, axis=0, keep_dims=True))
-subtraction = images - tf.reduce_mean(images, axis=0, keep_dims=True)
+mean_image_4d = tf.reduce_mean(images, axis=0, keep_dims=True)
+subtraction = images - mean_image_4d
 
 """In this part, I compared the difference between the standard deviation
 of a batch that is not divided and divided to images.shape[0]. I did this 
@@ -97,7 +97,7 @@ axs[1].set_title('With / images.shape[0]')
 
 # Normalization
 # 0-1 normalization: (x - min(x)) / (max(x) - min(x))
-norm_images_op = tf.divide(tf.subtract(images, mean_image_op), std_image_op)
+norm_images_op = tf.divide(tf.subtract(images, mean_image_4d), std_image_op)
 norm_images = sess.run(norm_images_op)
 print(np.min(norm_images), np.max(norm_images))
 print(images.dtype)
@@ -119,7 +119,8 @@ plt.imsave(arr=kernel_4d[:, :, 0, 0], fname='kernel.png', cmap='gray')
 """ TODO: Work on this one because my computer is failing when I put images
 on the first argument
 """
-convolved = utils.convolve(mean_image_4d, kernel_4d)
+# convolved = utils.convolve(mean_image_4d, kernel_4d)
+convolved = sess.run(tf.nn.conv2d(mean_image_4d, kernel_4d, strides=[1, 1, 1, 1], padding='SAME'))
 convolved_show = (convolved - min(convolved)) / (np.max(convolved) - np.min(convolved))
 print(convolved_show.shape)
 plt.figure(figsize=(10, 10))
