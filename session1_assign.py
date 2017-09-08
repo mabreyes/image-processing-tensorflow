@@ -126,3 +126,5 @@ print(convolved_show.shape)
 plt.figure(figsize=(10, 10))
 plt.imshow(utils.montage(convolved_show[...,0], 'convolved.png'), cmap='gray')
 plt.show()
+
+# TODO: Identify error because convolved image is all black
