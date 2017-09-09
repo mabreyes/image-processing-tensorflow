@@ -108,7 +108,7 @@ plt.imshow(utils.montage(norm_images_show, 'normalized.png'))
 # plt.show()
 
 # Convolution
-ksize = 32
+ksize = 16
 kernel = np.concatenate([utils.gabor(ksize) [:, :, np.newaxis] for i in range(3)], axis=2)
 kernel_4d = sess.run(tf.reshape(kernel, [ksize, ksize, 3, 1]))
 # Input channel is 3 (rgb) output channel is just 1
