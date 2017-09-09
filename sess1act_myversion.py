@@ -49,3 +49,21 @@ normalize_show = tf.divide(normalize - np.min(normalize), np.max(normalize) - np
 # normalize_show = (normalize - np.min(normalize)) / (np.max(normalize) - np.min(normalize))
 plt.imshow(utils.montage(normalize_show, 'normalized.png'))
 plt.show()
+
+# Convolution
+ksize = 16
+kernel = np.concatenate([utils.gabor(ksize) [:, :, np.newaxis] for i in range(3)], axis=2)
+kernel_4d = sess.run(tf.reshape(kernel, [ksize, ksize, 3, 1]))
+# Input channel is 3 (rgb) output channel is just 1
+assert(kernel_4d.shape == (ksize, ksize, 3, 1))
+plt.figure(figsize=(5, 5))
+plt.imshow(kernel_4d[:, :, 0, 0], cmap='gray')
+# plt.imsave(arr=kernel_4d[:, :, 0, 0], fname='kernel.png', cmap='gray')
+plt.show()
+
+convolved = sess.run(tf.nn.conv2d(mean_images_4d, kernel_4d, strides=[1, 1, 1, 1], padding='SAME'))
+# convolved_show = (convolved - min(convolved)) / (np.max(convolved) - np.min(convolved))
+# print(convolved_show.shape)
+plt.figure(figsize=(10, 10))
+plt.imshow(utils.montage(convolved[...,0], 'convolved.png'), cmap='gray')
+plt.show()
