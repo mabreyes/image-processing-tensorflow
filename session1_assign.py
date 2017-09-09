@@ -122,8 +122,8 @@ on the first argument
 """
 # convolved = utils.convolve(mean_image_4d, kernel_4d)
 convolved = sess.run(tf.nn.conv2d(mean_image_4d, kernel_4d, strides=[1, 1, 1, 1], padding='SAME'))
-convolved_show = (convolved - min(convolved)) / (np.max(convolved) - np.min(convolved))
-print(convolved_show.shape)
+# convolved_show = (convolved - min(convolved)) / (np.max(convolved) - np.min(convolved))
+# print(convolved_show.shape)
 plt.figure(figsize=(10, 10))
-plt.imshow(utils.montage(convolved_show[...,0], 'convolved.png'), cmap='gray')
+plt.imshow(utils.montage(convolved[...,0], 'convolved.png'), cmap='gray')
 plt.show()
