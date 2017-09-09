@@ -81,6 +81,7 @@ assert (std_image.shape == (100, 100) or std_image.shape == (100, 100, 3))
 std_image_show = std_image / np.max(std_image)
 
 # With / images.shape[0]
+# Do not use this type of deviation since it is not simplified to the nearest tens
 std_image_op_2 = tf.sqrt(tf.reduce_mean(subtraction * subtraction, axis=0) / images.shape[0])
 std_image_2 = sess.run(std_image_op_2)
 assert (std_image_2.shape == (100, 100) or std_image_2.shape == (100, 100, 3))
@@ -126,5 +127,3 @@ print(convolved_show.shape)
 plt.figure(figsize=(10, 10))
 plt.imshow(utils.montage(convolved_show[...,0], 'convolved.png'), cmap='gray')
 plt.show()
-
-# TODO: Identify error because convolved image is all black
