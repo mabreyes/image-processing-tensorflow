@@ -46,7 +46,6 @@ for iter_i in range(n_iterations):
 	init_p -=learning_rate * gradient[int(init_p)]
 	# Parameters x, y, circle color, transparency, color
 	ax.plot(x[int(init_p)], cost[int(init_p)], 'ro', alpha=(iter_i + 1) / n_iterations, color=scalar_map.to_rgba(iter_i))
-	ax.plot(x[int(init_p)])
 plt.show()
 
 # Two-parameter gradient descent
@@ -59,4 +58,25 @@ ax.plot_surface(X, Y, Z, rstride=2, cstride=2, alpha=0.75, cmap='jet', shade=Fal
 ax.set_ylabel('Some Parameter 2')
 ax.set_xlabel('Some Parameter 1')
 ax.set_zlabel('Cost')
+plt.show()
+
+# Plot different learning rates
+fig, axs = plt.subplots(1, 3, figsize=(20, 6))
+for rate_i, learning_rate in enumerate([0.01, 1.0, 500.0]):
+	ax = axs[rate_i]
+	x = np.linspace(-1, 1, 200)
+	hz = 10
+	cost = np.sin(hz*x)*np.exp(-x)
+	gradient = np.diff(cost)
+	ax.plot(x, cost)
+	ax.set_ylabel('Cost')
+	ax.set_xlabel('Some Parameter')
+	ax.set_title(str(learning_rate))
+	n_iterations = 500
+	cmap = plt.get_cmap('coolwarm')
+	c_norm = colors.Normalize(vmin=0, vmax=n_iterations)
+	init_p = 120
+	for iter_i in range(n_iterations):
+		init_p -= learning_rate * gradient[int(init_p)]
+		ax.plot(x[int(init_p)], cost[int(init_p)], 'ro', alpha=(iter_i + 1) / n_iterations, color=scalar_map.to_rgba(iter_i))
 plt.show()
