@@ -1,7 +1,7 @@
-# Selfpaced Machine Learning and TensorFlow codes
-This repository is a collection of my machine learning and TensorFlow codes. It contains Python scripts, Markdowns, and Jupyter Notebooks. I'm a total beginner of Machine Learning so I'm pushing all my commits in this repository to every milestone and codes I've done during my selfpaced tutorials.
+# Image processing with Machine Learning and TensorFlow
+This is my repository of my image processing, classification, and prediction with Machine Learning and TensorFlow. As a beginner in Machine Learning, I am pushing all commits to this repository so that you also can learn it on your own with limitations provided under the MIT license. 
 
-The contents of this repository are of completion of the tutorial by [@pkmital/CADL](https://github.com/pkmital/CADL). Free online lesson can be found at [Kadenze](https://www.kadenze.com/courses/creative-applications-of-deep-learning-with-tensorflow/info).
+The contents of this repository are of completion of the tutorial by [Parag K Mital](https://github.com/pkmital) which is [CADL](https://github.com/pkmital/CADL). Free online lesson can be found at [Kadenze](https://www.kadenze.com/courses/creative-applications-of-deep-learning-with-tensorflow/info).
 
 ### Social media
 * Follow Marc X: [Facebook](https://facebook.com/marcreyesph), [GitHub](https://github.com/marcreyesph)
