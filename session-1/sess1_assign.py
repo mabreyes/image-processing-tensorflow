@@ -14,7 +14,7 @@ os.environ['TF_CPP_MIN_LOG_LEVEL']='2'
 uniform from 000001.jpg to 000100.jpg
 """
 """def rename_images():
-	path = './img_session1_assign'
+	path = './celeba_dataset_session1_assign'
 	files = os.listdir(path)
 	ctr = 1
 
@@ -27,8 +27,8 @@ if __name__ == "__main__":
 	rename_images()
 """
 
-image_files = [os.path.join('img_session1_assign', image_files_i)
-               for image_files_i in os.listdir('img_session1_assign')
+image_files = [os.path.join('celeba_dataset_session1_assign', image_files_i)
+               for image_files_i in os.listdir('celeba_dataset_session1_assign')
                if '.jpg' in image_files_i]
 
 assert(len(image_files) == 100)

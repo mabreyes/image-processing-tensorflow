@@ -1,6 +1,6 @@
-img_align_celeba/
-img_align_celeba_small/
-img_session1_assign/
+celeba_dataset_minified/
+celeba_dataset_original/
+celeba_dataset_session1_assign/
 libs/
 plt_image_montage/
 /static

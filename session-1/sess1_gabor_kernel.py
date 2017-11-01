@@ -9,8 +9,8 @@ os.environ['TF_CPP_MIN_LOG_LEVEL']='2'
 
 sess = tf.InteractiveSession()
 
-img_dataset = [os.path.join('img_align_celeba_small', img_i)
-			   for img_i in os.listdir('img_align_celeba_small')
+img_dataset = [os.path.join('celeba_dataset_minified', img_i)
+			   for img_i in os.listdir('celeba_dataset_minified')
 			   if '.jpg' in img_i]
 
 img_dataset_read = [plt.imread(img_i)
